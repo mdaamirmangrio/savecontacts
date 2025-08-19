@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts Dashboard - ContactSave</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>ContactSave</h1>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="user-name"><%= userdata.name %> </span>
+                    <span class="user-contact"><%= userdata.phone %></span>
+                    <span class="user-email"><%= userdata.email %></span>
+                </div>
+                <div class="user-avatar">
+                    <span><%= userdata.name.charAt(0) %></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header Section -->
+            <section class="dashboard-header">
+                <h2>Your Contacts</h2>
+                <p>Manage and organize your contacts efficiently</p>
+            </section>
+
+            <!-- Add New Contact Form -->
+            <section class="add-contact-section">
+                <div class="form-card">
+                    <h3>Add New Contact</h3>
+                    <form id="addContactForm" class="contact-form" action="/add" method="POST">
+                        <div class="form-group">
+                            <label for="contactName">Full Name</label>
+                            <input type="text" id="contactName" name="contactName" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone Number</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email Address</label>
+                            <input type="email" id="contactEmail" name="contactEmail" placeholder="Enter email address" required>
+                        </div>
+                        <button type="submit" class="save-btn">Save Contact</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Contacts List -->
+            <section class="contacts-section">
+                <div class="contacts-header">
+                    <h3>Saved Contacts</h3>
+                    <span class="contacts-count"> <%= contacts.length %> contacts</span>
+                </div>
+                <div class="contacts-grid" id="contactsList">
+                  
+
+
+                  <% for(let contact of contacts) { %>
+                    <div class="contact-card">
+                        <div class="contact-avatar">
+                            <span> <%= contact.name.charAt(0) %> </span>
+                        </div>
+
+
+                        <div class="contact-info">
+                            <h4><%= contact.name %></h4>
+                            <p class="contact-phone"><%= contact.phone %></p>
+                            <p class="contact-email"><%= contact.email %></p>
+                        </div>
+                        <div class="contact-actions">
+                        </div>
+                    </div>
+
+                    <% } %>
+                        <!--  -->
+                    
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3>Contact Saved!</h3>
+            <p>Your contact has been successfully added.</p>
+            <button id="addAnotherBtn" class="modal-btn primary">Add Another Contact</button>
+            <button id="closeModalBtn" class="modal-btn secondary">Close</button>
+        </div>
+    </div>
+
+    <!-- <script src="dashboard-script.js"></script> -->
+</body>
+</html>
